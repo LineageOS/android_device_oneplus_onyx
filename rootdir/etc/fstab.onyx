@@ -5,18 +5,15 @@
 #TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
-#<src>                                                <mnt_point>  <type>  <mnt_flags and options>                     <fs_mgr_flags>
-#/dev/block/platform/msm_sdcc.1/by-name/system         /system      ext4    ro,barrier=1,discard                                wait
-#/dev/block/platform/msm_sdcc.1/by-name/userdata       /data        ext4    nosuid,nodev,barrier=1,noauto_da_alloc,discard      wait,check,encryptable=footer,resize
-#ifdef VENDOR_EDIT
-#hefaxi@filesystem, 2015/09/16, add errors=panic mount option
+#<src>                                                <mnt_point>  <type>  <mnt_flags and options>                                          <fs_mgr_flags>
+/dev/block/platform/msm_sdcc.1/by-name/boot           /boot        emmc    defaults                                                         defaults
+/dev/block/platform/msm_sdcc.1/by-name/recovery       /recovery    emmc    defaults                                                         defaults
 /dev/block/platform/msm_sdcc.1/by-name/system         /system      ext4    ro,barrier=1,discard,errors=panic                                wait
 /dev/block/platform/msm_sdcc.1/by-name/userdata       /data        ext4    nosuid,nodev,barrier=1,noauto_da_alloc,discard,errors=panic      wait,check,encryptable=footer,resize
-#endif
-/devices/msm_sdcc.2/mmc_host                          auto         auto    defaults          wait,voldmanaged=sdcard1:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskA:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskB:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskC:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskD:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskE:auto
-/devices/platform/xhci-hcd/usb1                       auto         auto    defaults          wait,voldmanaged=UDiskF:auto
+/dev/block/platform/msm_sdcc.1/by-name/cache          /cache       ext4    nosuid,nodev,barrier=1,noauto_da_alloc,discard,errors=panic      wait
+/dev/block/platform/msm_sdcc.1/by-name/persist        /persist     ext4    nosuid,nodev,barrier=1                                           wait
+/dev/block/platform/msm_sdcc.1/by-name/modem          /firmware    vfat    ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337         wait
+/devices/msm_sdcc.2/mmc_host                          auto         auto    defaults                                                         wait,voldmanaged=sdcard1:auto
+/devices/platform/xhci-hcd/usb1                       auto         auto    defaults                                                         wait,voldmanaged=usbdisk:auto
+
+
