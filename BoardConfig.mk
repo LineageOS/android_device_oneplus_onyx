@@ -62,7 +62,7 @@ endif
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Assert
-# TARGET_OTA_ASSERT_DEVICE := onyx,A0001
+# TARGET_OTA_ASSERT_DEVICE := onyx,E1003
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true

@@ -27,19 +27,19 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 PRODUCT_NAME := cm_onyx
 PRODUCT_DEVICE := onyx
 PRODUCT_MANUFACTURER := OnePlus
-PRODUCT_MODEL := A0001
+PRODUCT_MODEL := E1003
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
 PRODUCT_BRAND := oneplus
 TARGET_VENDOR := oneplus
 TARGET_VENDOR_PRODUCT_NAME := onyx
-TARGET_VENDOR_DEVICE_NAME := A0001
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=A0001 PRODUCT_NAME=onyx
+TARGET_VENDOR_DEVICE_NAME := E1003
+PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=E1003 PRODUCT_NAME=onyx
 
 ## Use the latest approved GMS identifiers unless running a signed build
 #~ ifneq ($(SIGN_BUILD),true)
 #~ PRODUCT_BUILD_PROP_OVERRIDES += \
-#~     BUILD_FINGERPRINT=oneplus/onyx/A0001:5.1.1/LMY48B/YOG4PAS1N0:user/release-keys \
+#~     BUILD_FINGERPRINT=oneplus/onyx/E1003:5.1.1/LMY48B/YOG4PAS1N0:user/release-keys \
 #~     PRIVATE_BUILD_DESC="onyx-user 5.1.1 LMY48B YOG4PAS1N0 release-keys"
 #~ endif

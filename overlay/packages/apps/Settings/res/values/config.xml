@@ -27,8 +27,8 @@
     <!-- Must be overlaid by device -->
     <bool name="config_show_ic_enable" translatable="false">true</bool>
     <!-- IC Code -->
-    <string name="ic_model" translatable="false">ONE A0001</string>
-    <string name="ic_code" translatable="false">12739A-A0001</string>
+    <string name="ic_model" translatable="false">ONE E1003</string>
+    <string name="ic_code" translatable="false">12739A-E1003</string>
 
     <!-- Regulatory Info -->
     <!-- Whether to show a preference item for regulatory information in About phone -->
