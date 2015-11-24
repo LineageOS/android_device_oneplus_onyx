@@ -32,6 +32,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libinit_onyx \
     fstab.onyx \
+    init.qcom.ril.sh \
     init.onyx.rc \
     init.qcom-common.rc \
     init.qcom.power.rc \
@@ -110,9 +111,9 @@ PRODUCT_COPY_FILES += \
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
 
-# Camera
-PRODUCT_PACKAGES += \
-    camera.onyx
+#~ # Camera
+#~ PRODUCT_PACKAGES += \
+#~     camera.onyx
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -248,9 +249,9 @@ ifneq ($(QCPATH),)
 PRODUCT_BOOT_JARS += WfdCommon
 endif
 
-# Recovery
-PRODUCT_EXTRA_RECOVERY_KEYS += \
-    $(LOCAL_PATH)/onyx
+#~ # Recovery
+#~ PRODUCT_EXTRA_RECOVERY_KEYS += \
+#~     $(LOCAL_PATH)/onyx
 
 # Thermal config
 PRODUCT_COPY_FILES += \
