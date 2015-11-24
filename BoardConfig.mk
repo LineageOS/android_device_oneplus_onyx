@@ -17,6 +17,9 @@
 # inherit from Oppo common
 -include device/oppo/common/BoardConfigCommon.mk
 
+# SELinux
+-include device/qcom/sepolicy/sepolicy.mk
+
 PLATFORM_PATH := device/oneplus/onyx
 
 # Include path
@@ -66,11 +69,12 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
-AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
-AUDIO_FEATURE_ENABLED_LOW_LATENCY_CAPTURE := true
-AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
-AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+#~ AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
+#~ AUDIO_FEATURE_ENABLED_LOW_LATENCY_CAPTURE := true
+#~ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
+#~ AUDIO_FEATURE_ENABLED_NEW_SAMPLE_RATE := true
+#~ AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
+
 
 # Bluetooth
 BLUETOOTH_HCI_USE_MCT := true
@@ -125,8 +129,8 @@ TARGET_USERIMAGES_USE_F2FS := true
 BOARD_VOLD_CRYPTFS_MIGRATE := true
 
 # Flags
-COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
-COMMON_GLOBAL_CPPFLAGS += -DNO_SECURE_DISCARD -DUSE_RIL_VERSION_10
+COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
+COMMON_GLOBAL_CPPFLAGS += -DNO_SECURE_DISCARD
 
 # Fonts
 EXTENDED_FONT_FOOTPRINT := true
@@ -170,9 +174,6 @@ TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.onyx
 # RPC
 TARGET_NO_RPC := true
 
-# SELinux
-include device/qcom/sepolicy/sepolicy.mk
-
 BOARD_SEPOLICY_DIRS += \
     $(PLATFORM_PATH)/sepolicy
 
@@ -198,7 +199,7 @@ ifneq ($(QCPATH),)
 -include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
 
 ifeq ($(BOARD_USES_QCNE),true)
-TARGET_LDPRELOAD := libNimsWrap.so
+#~ TARGET_LDPRELOAD := libNimsWrap.s
 endif
 endif
 
