@@ -103,15 +103,7 @@ config_bt ()
         setprop ro.qualcomm.bluetooth.map true
         setprop ro.qualcomm.bluetooth.nap true
         setprop ro.bluetooth.sap true
-        case $target in
-          "apq8084")
-              setprop ro.bluetooth.dun true
-              logi "Enabling BT-DUN for APQ8084"
-              ;;
-          *)
-              setprop ro.bluetooth.dun false
-              ;;
-        esac
+        setprop ro.bluetooth.dun false
         ;;
     "msm")
         setprop ro.qualcomm.bluetooth.opp true
@@ -120,8 +112,8 @@ config_bt ()
         setprop ro.qualcomm.bluetooth.pbap true
         setprop ro.qualcomm.bluetooth.ftp true
         setprop ro.qualcomm.bluetooth.nap true
-        setprop ro.bluetooth.sap true
-        setprop ro.bluetooth.dun true
+        setprop ro.bluetooth.sap false
+        setprop ro.bluetooth.dun false
         case $btsoc in
           "ath3k")
               setprop ro.qualcomm.bluetooth.map false
@@ -139,8 +131,8 @@ config_bt ()
         setprop ro.qualcomm.bluetooth.ftp true
         setprop ro.qualcomm.bluetooth.map true
         setprop ro.qualcomm.bluetooth.nap true
-        setprop ro.bluetooth.sap true
-        setprop ro.bluetooth.dun true
+        setprop ro.bluetooth.sap false
+        setprop ro.bluetooth.dun false
         ;;
   esac
 
@@ -160,13 +152,10 @@ config_bt ()
            setprop ro.qualcomm.bt.hci_transport smd
        fi
        ;;
-    "apq8084" | "mpq8092" )
-       if [ "$btsoc" != "rome" ]
+    "apq8084")
+       if ["$btsoc" != "rome"]
        then
            setprop ro.qualcomm.bt.hci_transport smd
-       elif [ "$btsoc" = "rome" ]
-       then
-           setprop ro.bluetooth.hfp.ver 1.6
        fi
        ;;
     *)

@@ -40,8 +40,12 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
-on post-fs
-    export_rc /system/etc/init.cne.rc
+on boot
+
+service qcom-c_main-sh /system/bin/sh /init.qcom.ril.sh
+    class main
+    user root
+    oneshot
 
 on post-fs-data
     # Torch
