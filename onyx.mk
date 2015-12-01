@@ -21,9 +21,6 @@ endif
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-1080p
 
-# Haters gonna hate..
-# PRODUCT_CHARACTERISTICS := nosdcard
-
 # Config scripts
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
@@ -46,15 +43,6 @@ PRODUCT_PACKAGES += \
     com.dsi.ant.antradio_library \
     libantradio
     
-#~ # Keyhandler
-#~ PRODUCT_PACKAGES += \
-#~     com.cyanogenmod.keyhandler
-
-#~ PRODUCT_SYSTEM_SERVER_JARS += com.cyanogenmod.keyhandler
-
-#~ # never dexopt the keyhandler
-#~ $(call add-product-dex-preopt-module-config,com.cyanogenmod.keyhandler,disable)
-
 # Audio
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdb/MTP_Bluetooth_cal.acdb:system/etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb \
@@ -110,10 +98,6 @@ PRODUCT_COPY_FILES += \
 # Boot animation
 TARGET_SCREEN_HEIGHT := 1920
 TARGET_SCREEN_WIDTH := 1080
-
-#~ # Camera
-#~ PRODUCT_PACKAGES += \
-#~     camera.onyx
 
 # Charger
 PRODUCT_PACKAGES += \
@@ -193,25 +177,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_BOOT_JARS += qcmediaplayer
 
-# NFC
-#~ ifeq ($(TARGET_BUILD_VARIANT),user)
-#~     NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfcee_access.xml
-#~ else
-#~     NFCEE_ACCESS_PATH := $(LOCAL_PATH)/configs/nfcee_access_debug.xml
-#~ endif
-#~ PRODUCT_COPY_FILES += \
-#~     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
-
-#~ PRODUCT_PACKAGES += \
-#~     NfcNci \
-#~     Tag \
-#~     nfc_nci.pn54x.default \
-#~     com.android.nfc_extras
-
-#~ PRODUCT_COPY_FILES += \
-#~     $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
-#~     $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
-
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
@@ -248,10 +213,6 @@ PRODUCT_PACKAGES += \
 ifneq ($(QCPATH),)
 PRODUCT_BOOT_JARS += WfdCommon
 endif
-
-#~ # Recovery
-#~ PRODUCT_EXTRA_RECOVERY_KEYS += \
-#~     $(LOCAL_PATH)/onyx
 
 # Thermal config
 PRODUCT_COPY_FILES += \
