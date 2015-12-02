@@ -84,7 +84,6 @@ QCOM_BT_USE_SMD_TTY := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
-COMMON_GLOBAL_CFLAGS += -DOPPO_CAMERA_HARDWARE
 
 # Charger
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
@@ -92,9 +91,6 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/cmhw
-
-# Enable transparent compression in the build
-# TARGET_TRANSPARENT_COMPRESSION_METHOD := lz4
 
 # Enable dexpreopt to speed boot time
 ifeq ($(HOST_OS),linux)
@@ -155,9 +151,6 @@ TARGET_INIT_VENDOR_LIB := libinit_onyx
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
 
-# NFC
-# BOARD_NFC_CHIPSET := pn547
-
 # Protobuf-c
 PROTOBUF_SUPPORTED := true
 
@@ -196,10 +189,6 @@ WPA_SUPPLICANT_VERSION           := VER_0_8_X
 # inherit from the proprietary version
 ifneq ($(QCPATH),)
 -include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
-
-ifeq ($(BOARD_USES_QCNE),true)
-#~ TARGET_LDPRELOAD := libNimsWrap.s
-endif
 endif
 
 -include vendor/oneplus/onyx/BoardConfigVendor.mk
