@@ -174,32 +174,12 @@ include \$(BUILD_PREBUILT)
 include \$(CLEAR_VARS)
 LOCAL_MODULE := qcrilmsgtunnel
 LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+LOCAL_SRC_FILES := proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_CLASS := APPS
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
-
-#~ include \$(CLEAR_VARS)
-#~ LOCAL_MODULE := PPPreference
-#~ LOCAL_MODULE_OWNER := $VENDOR
-#~ LOCAL_SRC_FILES := proprietary/app/PPPreference/PPPreference.apk
-#~ LOCAL_MODULE_TAGS := optional
-#~ LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-#~ LOCAL_MODULE_CLASS := APPS
-#~ LOCAL_CERTIFICATE := platform
-#~ include \$(BUILD_PREBUILT)
-
-#~ include \$(CLEAR_VARS)
-#~ LOCAL_MODULE := QuickBoot
-#~ LOCAL_MODULE_OWNER := $VENDOR
-#~ LOCAL_SRC_FILES := proprietary/app/QuickBoot/QuickBoot.apk
-#~ LOCAL_MODULE_TAGS := optional
-#~ LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-#~ LOCAL_MODULE_CLASS := APPS
-#~ LOCAL_CERTIFICATE := platform
-#~ include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
 LOCAL_MODULE := shutdownlistener
@@ -353,17 +333,6 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH := \$(TARGET_OUT_VENDOR_SHARED_LIBRARIES)
 include \$(BUILD_PREBUILT)
-
-#~ include \$(CLEAR_VARS)
-#~ LOCAL_MODULE := libwpa_qmi_eap_proxy
-#~ LOCAL_MODULE_OWNER := $VENDOR
-#~ LOCAL_SRC_FILES := proprietary/lib/libwpa_qmi_eap_proxy.so
-#~ LOCAL_MODULE_TAGS := optional
-#~ LOCAL_MODULE_SUFFIX := .so
-#~ LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-#~ LOCAL_MODULE_PATH := \$(TARGET_OUT_SHARED_LIBRARIES)
-#~ LOCAL_PROPRIETARY_MODULE := true
-#~ include \$(BUILD_PREBUILT)
 
 endif
 
