@@ -1,5 +1,5 @@
 #
-# Copyright 2014 The CyanogenMod Project
+# Copyright 2015 Arvind Mukund <armu30@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,23 +16,29 @@
 
 import /init.qcom-common.rc
 
-on fs
-    mount_all ./fstab.onyx
-    restorecon_recursive /persist
-    setprop ro.crypto.fuse_sdcard true
-
 on init
     # See storage config details at http://source.android.com/tech/storage/
-    chmod 0701 /mnt/media_rw
     mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
-    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
-    mkdir /storage/usbdisk 0700 root root
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /mnt/media_rw/UDiskA 0700 media_rw media_rw
+    mkdir /mnt/media_rw/UDiskB 0700 media_rw media_rw
+    mkdir /mnt/media_rw/UDiskC 0700 media_rw media_rw
+    mkdir /mnt/media_rw/UDiskD 0700 media_rw media_rw
+    mkdir /mnt/media_rw/UDiskE 0700 media_rw media_rw
+    mkdir /mnt/media_rw/UDiskF 0700 media_rw media_rw
+    mkdir /storage/UDiskA 0700 root root
+    mkdir /storage/UDiskB 0700 root root
+    mkdir /storage/UDiskC 0700 root root
+    mkdir /storage/UDiskD 0700 root root
+    mkdir /storage/UDiskE 0700 root root
+    mkdir /storage/UDiskF 0700 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
+    export SECONDARY_STORAGE /storage/sdcard1
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE /storage/usbdisk
 
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
@@ -40,23 +46,68 @@ on init
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
+
 on boot
 
-service qcom-c_main-sh /system/bin/sh /init.qcom.ril.sh
-    class main
-    user root
-    oneshot
+on post-fs
+    # export_rc /system/etc/init.cne.rc
 
 on post-fs-data
     # Torch
     chown system camera /sys/class/leds/torch-light/brightness
     chmod 0660 /sys/class/leds/torch-light/brightness
 
+on fs
+    mount_all ./fstab.onyx
+    restorecon_recursive /persist
+    setprop ro.crypto.fuse_sdcard true
+
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+service sdcard /system/bin/sdcard -u 1023 -g 1023  -l /data/media /mnt/shell/emulated
     class late_start
 
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
     class late_start
     disabled
 
+service fuse_uicc0 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc0 /storage/uicc0
+    class late_start
+    disabled
+
+service fuse_uicc1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/uicc1 /storage/uicc1
+    class late_start
+    disabled
+
+service fuse_UDiskA /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/UDiskA /storage/UDiskA
+    class late_start
+    disabled
+
+on property:ro.fuse_sdcard=true
+    start sdcard
+
+service_redefine ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    socket cutback stream 660 media radio
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+
+service ril-daemon1 /system/bin/rild -c 2
+    class main
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+    disabled
+
+service ril-init-script /system/bin/sh /system/etc/init.qcom.ril.sh
+    class late_start
+    user root
+    group root
+    oneshot
+
+# Binding fuse mount point to /storage/emulated/legacy
+on property:init.svc.sdcard=running
+    wait /mnt/shell/emulated/0
+    mount none /mnt/shell/emulated/0 /storage/emulated/legacy bind
