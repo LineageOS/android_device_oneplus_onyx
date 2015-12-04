@@ -50,7 +50,8 @@ on init
 on boot
 
 on post-fs
-    # export_rc /system/etc/init.cne.rc
+    # Use reversed key representations to match stock
+    write /proc/s1302/key_rep 1
 
 on post-fs-data
     # Torch
