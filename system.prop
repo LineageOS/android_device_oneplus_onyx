@@ -1,6 +1,10 @@
 #
-# system.prop for one+
+# system.prop for OnePlus X
 #
+
+#Device unified props
+ro.build.product=ONE
+ro.product.device=ONE
 
 ro.sf.lcd_density=480
 # rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so

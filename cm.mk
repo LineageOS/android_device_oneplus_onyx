@@ -20,16 +20,10 @@ $(call inherit-product, device/oneplus/onyx/onyx.mk)
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
-
+PRODUCT_RELEASE_NAME := OnePlus X
 PRODUCT_NAME := cm_onyx
 PRODUCT_DEVICE := onyx
 PRODUCT_MANUFACTURER := OnePlus
-PRODUCT_MODEL := E1003
+PRODUCT_MODEL := ONE
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
-
-PRODUCT_BRAND := oneplus
-TARGET_VENDOR := oneplus
-TARGET_VENDOR_PRODUCT_NAME := onyx
-TARGET_VENDOR_DEVICE_NAME := E1003
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=E1003 PRODUCT_NAME=onyx
