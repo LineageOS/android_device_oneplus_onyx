@@ -184,3 +184,6 @@
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
+
+#Persistent
+/dev/block/mmcblk0p26		0600	system	system

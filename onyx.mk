@@ -32,14 +32,14 @@ PRODUCT_PACKAGES += \
 # Ramdisk
 PRODUCT_PACKAGES += \
     libinit_onyx \
-    fstab.onyx \
+    fstab.qcom \
     init.qcom.ril.sh \
-    init.onyx.rc \
+    init.qcom.rc \
     init.qcom-common.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
-    ueventd.onyx.rc
+    ueventd.qcom.rc
 
 # ANT+
 PRODUCT_PACKAGES += \

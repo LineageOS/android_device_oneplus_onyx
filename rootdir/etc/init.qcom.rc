@@ -23,17 +23,7 @@ on init
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /storage/sdcard1 0700 root root
     mkdir /mnt/media_rw/UDiskA 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UDiskB 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UDiskC 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UDiskD 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UDiskE 0700 media_rw media_rw
-    mkdir /mnt/media_rw/UDiskF 0700 media_rw media_rw
     mkdir /storage/UDiskA 0700 root root
-    mkdir /storage/UDiskB 0700 root root
-    mkdir /storage/UDiskC 0700 root root
-    mkdir /storage/UDiskD 0700 root root
-    mkdir /storage/UDiskE 0700 root root
-    mkdir /storage/UDiskF 0700 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export SECONDARY_STORAGE /storage/sdcard1
@@ -48,10 +38,50 @@ on init
 
 
 on boot
+	export_rc /system/etc/init.cne.rc
 
 on post-fs
-    # Use reversed key representations to match stock
-    write /proc/s1302/key_rep 1
+    # Touchscreen
+    chown system radio /proc/touchpanel/double_tap_enable
+    chmod 0660 /proc/touchpanel/double_tap_enable
+
+    chown root system /proc/touchpanel/camera_enable
+    chmod 0660 /proc/touchpanel/camera_enable
+
+    chown root system /proc/touchpanel/music_enable
+    chmod 0660 /proc/touchpanel/music_enable
+
+    chown root system /proc/touchpanel/flashlight_enable
+    chmod 0660 /proc/touchpanel/flashlight_enable
+
+    chown root system /proc/touchpanel/glove_mode_enable
+    chmod 0660 /proc/touchpanel/glove_mode_enable
+
+    chown system system /sys/devices/virtual/graphics/fb0/cabc
+    chmod 0660 /sys/devices/virtual/graphics/fb0/cabc
+
+    chown system system /sys/devices/virtual/graphics/fb0/sre
+    chmod 0660 /sys/devices/virtual/graphics/fb0/sre
+
+    chown system system /sys/devices/virtual/graphics/fb0/color_enhance
+    chmod 0660 /sys/devices/virtual/graphics/fb0/color_enhance
+
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
+
+    chown system system /sys/devices/virtual/graphics/fb0/aco
+    chmod 0660 /sys/devices/virtual/graphics/fb0/aco
+
+    chown system system /sys/devices/virtual/graphics/fb0/dyn_pu
+    chmod 0660 /sys/devices/virtual/graphics/fb0/dyn_pu
+
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/vtg_max
+    chown system system /sys/class/timed_output/vibrator/vtg_min
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_level
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_max
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_min
+
 
 on post-fs-data
     # Torch
@@ -59,12 +89,12 @@ on post-fs-data
     chmod 0660 /sys/class/leds/torch-light/brightness
 
 on fs
-    mount_all ./fstab.onyx
+    mount_all ./fstab.qcom
     restorecon_recursive /persist
     setprop ro.crypto.fuse_sdcard true
 
 # virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023  -l /data/media /mnt/shell/emulated
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
     class late_start
 
 service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
