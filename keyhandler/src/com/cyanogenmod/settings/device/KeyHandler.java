@@ -63,10 +63,7 @@ public class KeyHandler implements DeviceKeyHandler {
     // Supported scancodes
     private static final int KEY_DOUBLE_TAP = 249;
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
-    private static final int GESTURE_TWO_SWIPE_SCANCODE = 251;
     private static final int GESTURE_V_SCANCODE = 252;
-    private static final int GESTURE_LTR_SCANCODE = 253;
-    private static final int GESTURE_GTR_SCANCODE = 254;
     private static final int MODE_MUTE = 600;
     private static final int MODE_DO_NOT_DISTURB = 601;
     private static final int MODE_NORMAL = 602;
@@ -76,10 +73,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int[] sSupportedGestures = new int[] {
         KEY_DOUBLE_TAP,
         GESTURE_CIRCLE_SCANCODE,
-        GESTURE_TWO_SWIPE_SCANCODE,
         GESTURE_V_SCANCODE,
-        GESTURE_LTR_SCANCODE,
-        GESTURE_GTR_SCANCODE,
         MODE_MUTE,
         MODE_DO_NOT_DISTURB,
         MODE_NORMAL
@@ -161,22 +155,10 @@ public class KeyHandler implements DeviceKeyHandler {
                 startActivitySafely(intent);
                 doHapticFeedback();
                 break;
-            case GESTURE_TWO_SWIPE_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
-                doHapticFeedback();
-                break;
             case GESTURE_V_SCANCODE:
                 ensureTorchManager();
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                 mTorchManager.toggleTorch();
-                doHapticFeedback();
-                break;
-            case GESTURE_LTR_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
-                doHapticFeedback();
-                break;
-            case GESTURE_GTR_SCANCODE:
-                dispatchMediaKeyWithWakeLockToMediaSession(KeyEvent.KEYCODE_MEDIA_NEXT);
                 doHapticFeedback();
                 break;
             case MODE_MUTE:
