@@ -108,6 +108,22 @@
              channels="1" />
     </EncoderProfile>
 
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="high" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="42000000"
+             width="3840"
+             height="2160"
+             frameRate="30" />
+
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+    -->
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150819, fix CTS, add 1080P setting as 4K is not used -->
 	<EncoderProfile quality="high" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="20000000"
@@ -186,6 +202,36 @@
              channels="2" />
     </EncoderProfile>
 
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="4kdci" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+            bitRate="42000000"
+            width="4096"
+            height="2160"
+            frameRate="24" />
+
+      <Audio codec="aac"
+            bitRate="156000"
+            sampleRate="48000"
+            channels="2" />
+    </EncoderProfile>
+    -->
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="2160p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+            bitRate="42000000"
+            width="3840"
+            height="2160"
+            frameRate="30" />
+
+      <Audio codec="aac"
+            bitRate="156000"
+            sampleRate="48000"
+            channels="2" />
+    </EncoderProfile>
+    -->
+
     <EncoderProfile quality="qcif" fileFormat="3gp" duration="30">
       <Video codec="h264"
              bitRate="192000"
@@ -239,6 +285,22 @@
              channels="1" />
     </EncoderProfile>
 
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="42000000"
+             width="3840"
+             height="2160"
+             frameRate="30" />
+
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+    -->
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150819, fix CTS, add 1080P setting as 4K is not used -->
     <EncoderProfile quality="timelapsehigh" fileFormat="mp4" duration="30">
       <Video codec="h264"
              bitRate="20000000"
@@ -294,6 +356,21 @@
              sampleRate="8000"
              channels="1" />
     </EncoderProfile>
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove unused size
+    <EncoderProfile quality="timelapsewqvga" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="720000"
+             width="432"
+             height="240"
+             frameRate="30" />
+
+      <Audio codec="amrnb"
+             bitRate="12200"
+             sampleRate="8000"
+             channels="1" />
+    </EncoderProfile>
+    -->
 
     <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
       <Video codec="h264"
@@ -379,7 +456,37 @@
              channels="2" />
     </EncoderProfile>
 
-         <ImageEncoding quality="95" />
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="timelapse4kdci" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+            bitRate="42000000"
+            width="4096"
+            height="2160"
+            frameRate="30" />
+
+      <Audio codec="aac"
+            bitRate="156000"
+            sampleRate="48000"
+            channels="2" />
+    </EncoderProfile>
+    -->
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove 4K setting as 4K is not used
+    <EncoderProfile quality="timelapse2160p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+            bitRate="42000000"
+            width="3840"
+            height="2160"
+            frameRate="30" />
+
+      <Audio codec="aac"
+            bitRate="156000"
+            sampleRate="48000"
+            channels="2" />
+    </EncoderProfile>
+    -->
+
+        <ImageEncoding quality="95" />
         <ImageEncoding quality="80" />
         <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
@@ -413,6 +520,18 @@
              bitRate="156000"
              sampleRate="48000"
              channels="2" />
+<!-- VENDOR_EDIT zoufeng@framework, 2015/01/26, Modify for
+      <Video codec="h264"
+             bitRate="20000000"
+             width="1920"
+             height="1080"
+             frameRate="30" />
+
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+-->
     </EncoderProfile>
 
     <EncoderProfile quality="qvga" fileFormat="mp4" duration="60">
@@ -466,7 +585,20 @@
              sampleRate="48000"
              channels="2" />
     </EncoderProfile>
+<!-- VENDOR_EDIT zoufeng@framework, 2015/01/26, Modify for 
+    <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="20000000"
+             width="1920"
+             height="1080"
+             frameRate="30" />
 
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+-->
     <EncoderProfile quality="qcif" fileFormat="3gp" duration="30">
       <Video codec="h264"
              bitRate="192000"
@@ -532,7 +664,18 @@
              bitRate="96000"
              sampleRate="48000"
              channels="1" />
+<!-- VENDOR_EDIT zoufeng@framework, 2015/01/26, Modify for
+      <Video codec="h264"
+             bitRate="20000000"
+             width="1920"
+             height="1080"
+             frameRate="30" />
 
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+-->
     </EncoderProfile>
 
     <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
@@ -576,6 +719,21 @@
              sampleRate="8000"
              channels="1" />
     </EncoderProfile>
+
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, remove unused size
+    <EncoderProfile quality="timelapsewqvga" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="720000"
+             width="432"
+             height="240"
+             frameRate="30" />
+
+      <Audio codec="amrnb"
+             bitRate="12200"
+             sampleRate="8000"
+             channels="1" />
+    </EncoderProfile>
+    -->
 
     <EncoderProfile quality="timelapsevga" fileFormat="mp4" duration="30">
       <Video codec="h264"
@@ -646,6 +804,20 @@
              sampleRate="48000"
              channels="1" />
     </EncoderProfile>
+<!-- VENDOR_EDIT zoufeng@framework, 2015/01/26, Modify for cts
+    <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
+      <Video codec="h264"
+             bitRate="20000000"
+             width="1920"
+             height="1080"
+             frameRate="30" />
+
+      <Audio codec="aac"
+             bitRate="156000"
+             sampleRate="48000"
+             channels="2" />
+    </EncoderProfile>
+-->
         <ImageEncoding quality="95" />
         <ImageEncoding quality="80" />
         <ImageEncoding quality="70" />
@@ -656,6 +828,12 @@
     <EncoderOutputFileFormat name="3gp" />
     <EncoderOutputFileFormat name="mp4" />
 
+    <!--
+         If a codec is not enabled, it is invisible to the applications
+         In other words, the applications won't be able to use the codec
+         or query the capabilities of the codec at all if it is disabled
+    -->
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, change 4K to 1080P as 4K is not used -->
     <VideoEncoderCap name="h264" enabled="true"
         minBitRate="64000" maxBitRate="42000000"
         minFrameWidth="176" maxFrameWidth="1920"
@@ -680,6 +858,7 @@
         maxHFRFrameWidth="0" maxHFRFrameHeight="0"
         maxHFRMode="0"  />
 
+    <!-- VENDOR_EDIT //chenneng/Neil Chen@camera, 20150813, change 4K to 1080P as 4K is not used -->
     <VideoEncoderCap name="h265" enabled="true"
         minBitRate="64000" maxBitRate="100000000"
         minFrameWidth="176" maxFrameWidth="1920"
