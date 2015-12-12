@@ -20,28 +20,19 @@ import java.io.File;
 
 import org.cyanogenmod.hardware.util.FileUtils;
 
-/*
- * Disable capacitive keys
- *
- * This is intended for use on devices in which the capacitive keys
- * can be fully disabled for replacement with a soft navbar. You
- * really should not be using this on a device with mechanical or
- * otherwise visible-when-inactive keys
- */
+public class TapToWake {
 
-public class KeyDisabler {
-
-    private static String CONTROL_PATH = "/proc/nav_switch";
+    private static String CONTROL_PATH = "/proc/touchpanel/double_tap_enable";
 
     public static boolean isSupported() {
         return new File(CONTROL_PATH).exists();
     }
 
-    public static boolean isActive() {
-        return (FileUtils.readOneLine(CONTROL_PATH).contains(":0"));
+    public static boolean isEnabled()  {
+        return "1".equals(FileUtils.readOneLine(CONTROL_PATH));
     }
 
-    public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
+    public static boolean setEnabled(boolean state)  {
+        return FileUtils.writeLine(CONTROL_PATH, (state ? "1" : "0"));
     }
 }
