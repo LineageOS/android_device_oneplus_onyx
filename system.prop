@@ -7,12 +7,8 @@ ro.build.product=ONE
 ro.product.device=ONE
 
 ro.sf.lcd_density=480
-# rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
-# persist.radio.add_power_save=1
-# persist.radio.apm_sim_not_pwdn=1
-# rol.ril.ext.ecclist=112,911,999,110,122,119,120,000,08,118
 
-# OnePlus X
+#Radio
 
 rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
@@ -27,25 +23,27 @@ persist.rild.nitz_short_ons_2=
 persist.rild.nitz_short_ons_3=
 ril.subscription.types=NV,RUIM
 DEVICE_PROVISIONED=1
-
+persist.radio.rat_on=combine
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 ro.data.large_tcp_window_size=true
-
-persist.fuse_sdcard=true
 persist.radio.multisim.config=dsds
 
+# sdcard
+persist.fuse_sdcard=true
+
+
 # sensors
-ro.qc.sdk.camera.facialproc=true
+ro.qc.sdk.sensors.gestures=true
 ro.qc.sdk.gestures.camera=false
-ro.qti.sdk.sensors.gestures=true
+ro.qc.sdk.camera.facialproc=false
 ro.qti.sensors.bte=true
 ro.qti.sensors.gtap=true
-ro.qti.sensors.ir_proximity=true
 ro.qti.sensors.vmd=true
 
 # gps
-persist.gps.qc_nlp_in_use=0
+persist.gps.qc_nlp_in_use=1
+persist.loc.nlp_name=com.qualcomm.location
 ro.gps.agps_provider=1
 
 # cabl is handled by the panel
