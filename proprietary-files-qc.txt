@@ -42,14 +42,20 @@ vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
+#Audio Firmware
+etc/firmware/tfa98xx.cnt
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
+
 # GPS
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
+priv-app/com.qualcomm.location/com.qualcomm.location.apk
 bin/loc_launcher
 bin/location-mq
 bin/lowi-server
 bin/quipc_igsn
 bin/quipc_main
 bin/xtwifi-client
+etc/xtwifi.conf
 bin/xtwifi-inet-agent
 etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
@@ -96,28 +102,38 @@ vendor/lib/librs_adreno_sha1.so
 vendor/lib/libscale.so
 
 # Graphics firmware
+etc/firmware/a225p5_pm4.fw
+etc/firmware/a225_pfp.fw
+etc/firmware/a225_pm4.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
 etc/firmware/a330_pfp.fw
 etc/firmware/a330_pm4.fw
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
 
 # Listen service
 vendor/lib/liblistenhardware.so
 vendor/lib/liblistenjni.so
--vendor/lib/liblisten.so
+vendor/lib/liblisten.so
 vendor/lib/liblistensoundmodel.so
 
 # Media
--vendor/lib/libHevcSwDecoder.so
+vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmmosal.so
 vendor/lib/libmmparser.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libDivxDrm.so
 vendor/lib/libExtendedExtractor.so
+vendor/lib/libOmxMux.so
 vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxAmrwbplusDec.so
-vendor/lib/libOmxEvrcDec.so
-vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxWmaDec.so
+vendor/lib/libOmxEvrcDec.so
+vendor/lib/libqomx_jpegdec.so
+vendor/lib/libqomx_jpegenc.so
+vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libOmxAmrwbplusDec.so
 vendor/lib/libSHIMDivxDrm.so
 
 # Perf
@@ -125,29 +141,28 @@ bin/mpdecision
 vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
-# -app/PPPreference/PPPreference.apk
 bin/mm-pp-daemon
 vendor/lib/libdisp-aba.so
--vendor/lib/libmm-abl.so
+vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
 bin/irsc_util
--vendor/lib/libdiag.so
+vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
--vendor/lib/libdsutils.so
--vendor/lib/libidl.so
--vendor/lib/libqcci_legacy.so
+vendor/lib/libdsutils.so
+vendor/lib/libidl.so
+vendor/lib/libqcci_legacy.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
--vendor/lib/libqmi.so
+vendor/lib/libqmi.so
 vendor/lib/libqmi_cci.so
--vendor/lib/libqmi_client_qmux.so
+vendor/lib/libqmi_client_qmux.so
 vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_csvt_srvc.so
 vendor/lib/libqmi_encdec.so
--vendor/lib/libqmiservices.so
+vendor/lib/libqmiservices.so
 vendor/lib/libsmemlog.so
 vendor/lib/libsystem_health_mon.so
 
@@ -155,22 +170,29 @@ vendor/lib/libsystem_health_mon.so
 # -app/QuickBoot/QuickBoot.apk
 
 # Radio
--priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
--app/shutdownlistener/shutdownlistener.apk
+priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/qmuxd
 bin/radish
 bin/rfs_access
 bin/rmt_storage
+vendor/lib/libcne.so
+vendor/lib/libNimsWrap.so
+vendor/lib/libcneconn.so
+vendor/lib/libcneqmiutils.so
+vendor/lib/libcneapiclient.so
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 framework/qcnvitems.jar
 framework/qcrilhook.jar
--lib/libmdmdetect.so
+lib/libmdmdetect.so
 vendor/lib/libconfigdb.so
 vendor/lib/libnetmgr.so
 vendor/lib/libperipheral_client.so
 vendor/lib/libril-qc-qmi-1.so
+lib/libril.so
+lib/libparam.so
 vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libxml.so
 
@@ -187,19 +209,68 @@ vendor/lib/libthermalioctl.so
 
 # Time services
 bin/time_daemon
--vendor/lib/libtime_genoff.so
--vendor/lib/libTimeService.so
--app/TimeService/TimeService.apk
+vendor/lib/libtime_genoff.so
+vendor/lib/libTimeService.so
+app/TimeService/TimeService.apk
 
 # Venus (media) firmware
-etc/firmware/venus.b00
 etc/firmware/venus.b01
 etc/firmware/venus.b02
 etc/firmware/venus.b03
-etc/firmware/venus.b04
+etc/firmware/venus.b00
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
+etc/firmware/venus.b04
+
+#Touch Panel firmware
+etc/firmware/tp/15055/15055_FW_S3508_Tpk.img
+etc/firmware/tp/15055/15055_Limit_Tpk.img
 
 # WiFi
--lib/libwpa_client.so
+lib/libwpa_client.so
 # lib/libwcnss_qmi.so
+
+# USF
+# etc/usf_post_boot.sh
+# etc/usf_settings.sh
+# etc/usf/sw_calib/cfg_dragon/usf_sw_calib_dragon.cfg
+# etc/usf/sw_calib/cfg_dragon/usf_sw_calib_tester_dragon.cfg
+# etc/usf/sw_calib/cfg_liquid/usf_sw_calib_tester_liquid.cfg
+# etc/usf/sw_calib/cfg_liquid/usf_sw_calib_liquid.cfg
+# etc/usf/sw_calib/cfg_fluid/usf_sw_calib_tester_fluid.cfg
+# etc/usf/sw_calib/cfg_fluid/usf_sw_calib_fluid.cfg
+# etc/usf/form_factor_liquid.cfg
+# etc/usf/pairing/cfg_liquid/usf_pairing_liquid.cfg
+# etc/usf/pairing/cfg_fluid/usf_pairing_fluid.cfg
+# etc/usf/version.txt
+# etc/usf/sync_gesture/cfg_liquid/usf_sync_gesture_liquid.cfg
+# etc/usf/sync_gesture/cfg_liquid/usf_sync_gesture_liquid_tx_transparent_data.bin
+# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_fluid_tx_transparent_data.bin
+# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_apps_fluid.cfg
+# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_fluid.cfg
+# etc/usf/tester/cfg_liquid/usf_tester_epos_liquid.cfg
+# etc/usf/tester/cfg_fluid/usf_tester_epos_fluid.cfg
+# etc/usf/tester/cfg_fluid/usf_tester_echo_fluid.cfg
+# etc/usf/epos/cfg_dragon/service_settings_dragon.xml
+# etc/usf/epos/cfg_liquid/ps_tuning1_idle_liquid.bin
+# etc/usf/epos/cfg_liquid/service_settings_liquid_folio.xml
+# etc/usf/epos/cfg_liquid/ps_tuning1_standby_liquid.bin
+# etc/usf/epos/cfg_liquid/service_settings_liquid.xml
+# etc/usf/epos/cfg_liquid/usf_epos_liquid.cfg
+# etc/usf/epos/cfg_liquid/usf_epos_liquid_ps_disabled.cfg
+# etc/usf/epos/cfg_liquid/service_settings_liquid_1_to_1.xml
+# etc/usf/epos/ASDConf.sdc
+# etc/usf/epos/cfg_fluid/usf_epos_fluid.cfg
+# etc/usf/epos/cfg_fluid/service_settings_fluid.xml
+# etc/usf/epos/cfg_fluid/ps_tuning1_fluid.bin
+# etc/usf/readme.txt
+# etc/usf/form_factor_fluid.cfg
+# bin/usf_epos
+# bin/usf_tester
+# bin/usf_pairing
+# bin/usf_sw_calib
+# bin/usf_sync_gesture
+# vendor/lib/libual.so
+# vendor/lib/libualutil.so
+# vendor/lib/libdpencalib.so
+# vendor/lib/libqcsyncgesture.so
