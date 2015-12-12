@@ -162,6 +162,9 @@ BOARD_USES_QCOM_HARDWARE := true
 # Radio
 TARGET_RIL_VARIANT := caf
 
+#Preload Libs
+TARGET_LDPRELOAD := libNimsWrap.so
+
 # Recovery
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 
