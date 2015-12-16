@@ -75,22 +75,22 @@ char const *const LED_BLINK_FILE
         = "/sys/class/leds/red/device/blink";
 
 char const *const LED_DT_RED_BRIGHTNESS
-        = "/sys/class/leds/led:rgb_red/brightness";
+        = "/sys/class/leds/red/brightness";
 
 char const *const LED_DT_GREEN_BRIGHTNESS
-        = "/sys/class/leds/led:rgb_green/brightness";
+        = "/sys/class/leds/green/brightness";
 
 char const *const LED_DT_BLUE_BRIGHTNESS
-        = "/sys/class/leds/led:rgb_blue/brightness";
+        = "/sys/class/leds/blue/brightness";
 
 char const *const LED_DT_RAMP_STEP_FILE
-        = "/sys/class/leds/led:rgb_red/ramp_step_ms";
+        = "/sys/class/leds/red/ramp_step_ms";
 
 char const *const LED_DT_DUTY_FILE
-        = "/sys/class/leds/led:rgb_red/duty_pcts";
+        = "/sys/class/leds/red/duty_pcts";
 
 char const *const LED_DT_BLINK_FILE
-        = "/sys/class/leds/led:rgb_red/blink";
+        = "/sys/class/leds/red/blink";
 
 // Number of steps to use in the duty array
 #define LED_DT_DUTY_STEPS       50
