@@ -39,6 +39,8 @@ on init
 
 on boot
 	export_rc /system/etc/init.cne.rc
+on property:sys.boot_completed=1
+	write /proc/otg_config/otg_switch 1
 
 on post-fs
     # Touchscreen
