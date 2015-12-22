@@ -25,10 +25,16 @@
 <!-- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN -->
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info>
-
     <acdb_ids>
-        <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="63" />
-        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="64" />
+		<device name="SND_DEVICE_OUT_HANDSET" acdb_id="103" />
+		<device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15" />
+		<device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
+		<device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="41" />
+		<device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="42" />
+		<device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="42" />
+		<device name="SND_DEVICE_IN_HDMI_MIC" acdb_id="119" />
+		<device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="35" />
+		<device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="42" />
     </acdb_ids>
 
     <backend_names>
@@ -42,7 +48,6 @@
     </pcm_ids>
 
     <device_names>
-		<!-- empty -->
+        <!-- empty -->
     </device_names>
-
 </audio_platform_info>
