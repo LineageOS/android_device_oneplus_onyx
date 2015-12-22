@@ -29,6 +29,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
 
+#FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     libinit_onyx \
