@@ -76,6 +76,9 @@
     <!-- If this is true, the screen will fade off. -->
     <bool name="config_animateScreenLights">false</bool>
 
+    <!-- Device doesn't support button backlight -->
+    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+
     <!-- The duration (in milliseconds) that the radio will scan for a signal
          when there's no network connection. If the scan doesn't timeout, use zero -->
     <integer name="config_radioScanningTimeout">0</integer>
