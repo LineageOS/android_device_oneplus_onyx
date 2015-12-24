@@ -92,6 +92,13 @@ on post-fs
     chmod 0644 /sys/class/leds/blue/blink
     chmod 0644 /sys/class/leds/green/blink
 
+    #Tri state keys
+    chown system system /sys/devices/tri_state_key.86/keyCode_top
+    chown system system /sys/devices/tri_state_key.86/keyCode_middle
+    chown system system /sys/devices/tri_state_key.86/keyCode_bottom
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_top
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_middle
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_bottom
 
 on post-fs-data
     # Torch
