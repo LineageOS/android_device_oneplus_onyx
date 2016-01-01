@@ -129,6 +129,13 @@ set_speaker_light_locked(struct light_device_t* dev,
     int onMS, offMS;
     unsigned int colorRGB;
 
+    if (state == NULL) {
+        write_int(RED_LED_FILE, 0);
+        write_int(GREEN_LED_FILE, 0);
+        write_int(BLUE_LED_FILE, 0);
+        return 0;
+    }
+
     switch (state->flashMode) {
         case LIGHT_FLASH_TIMED:
             onMS = state->flashOnMS;
@@ -177,10 +184,11 @@ set_speaker_light_locked(struct light_device_t* dev,
 static void
 handle_speaker_battery_locked(struct light_device_t* dev)
 {
-    if (is_lit(&g_battery)) {
-        set_speaker_light_locked(dev, &g_battery);
-    } else {
+    set_speaker_light_locked(dev, NULL);
+    if (is_lit(&g_notification)) {
         set_speaker_light_locked(dev, &g_notification);
+    } else {
+        set_speaker_light_locked(dev, &g_battery);
     }
 }
 
