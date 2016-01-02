@@ -1,5 +1,6 @@
 /*
    Copyright (c) 2015, The CyanogenMod Project
+   Copyright (c) 2016, Arvind Mukund <armu30@gmail.com>
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
