@@ -89,9 +89,7 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS += \
-    device/oneplus/onyx/cmhw \
-    hardware/cyanogen/cmhw
+BOARD_HARDWARE_CLASS += $(PLATFORM_PATH)/cmhw
 
 # Enable dexpreopt to speed boot time
 ifeq ($(HOST_OS),linux)

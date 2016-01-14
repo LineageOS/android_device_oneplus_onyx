@@ -16,6 +16,8 @@
 
 package org.cyanogenmod.hardware;
 
+import java.io.File;
+
 import org.cyanogenmod.hardware.util.FileUtils;
 
 /*
@@ -29,16 +31,17 @@ import org.cyanogenmod.hardware.util.FileUtils;
 
 public class KeyDisabler {
 
-    private static String CONTROL_PATH = "/proc/touchpanel/keypad_enable";
+    private static String CONTROL_PATH = "/proc/nav_switch";
 
-    public static boolean isSupported() { return true; }
+    public static boolean isSupported() {
+        return new File(CONTROL_PATH).exists();
+    }
 
     public static boolean isActive() {
-        return (FileUtils.readOneLine(CONTROL_PATH).equals("0"));
+        return (FileUtils.readOneLine(CONTROL_PATH).contains(":0"));
     }
 
     public static boolean setActive(boolean state) {
         return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
     }
-
 }

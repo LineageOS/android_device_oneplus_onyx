@@ -32,6 +32,7 @@ import android.provider.Settings;
 
 public class TouchscreenGestureSettings extends NodePreferenceActivity {
 
+    private static final String NAV_SWITCH_NODE = "/proc/nav_switch";
     private static final String KEY_HAPTIC_FEEDBACK = "touchscreen_gesture_haptic_feedback";
 
     private ListPreference mSliderTop;
@@ -45,6 +46,9 @@ public class TouchscreenGestureSettings extends NodePreferenceActivity {
         addPreferencesFromResource(R.xml.touchscreen_panel);
 
         SwitchPreference mKeySwap = (SwitchPreference) findPreference(Constants.KEY_SWAP_KEY);
+        String nav_switch = FileUtils.readOneLine(NAV_SWITCH_NODE);
+        if (nav_switch != null && nav_switch.contains(":0"))
+            mKeySwap.setEnabled(false);
 
         mSliderTop = (ListPreference) findPreference("keycode_slider_top");
         mSliderMiddle = (ListPreference) findPreference("keycode_slider_middle");
@@ -108,10 +112,13 @@ public class TouchscreenGestureSettings extends NodePreferenceActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         // If running on a phone, remove padding around the listview
         if (!ScreenType.isTablet(this)) {
             getListView().setPadding(0, 0, 0, 0);
         }
 
+        mHapticFeedback.setChecked(
+                Settings.System.getInt(getContentResolver(), KEY_HAPTIC_FEEDBACK, 1) != 0);
     }
 }

@@ -38,15 +38,15 @@ public class Constants {
     public static final String TOUCHSCREEN_FLASHLIGHT_NODE = "/proc/touchpanel/flashlight_enable";
 
     // Proc nodes default values
-    public static final boolean KEY_SWAP_DEFAULT = true;
+    public static final boolean KEY_SWAP_DEFAULT = false;
     public static final boolean TOUCHSCREEN_CAMERA_DEFAULT = false;
     public static final boolean TOUCHSCREEN_MUSIC_DEFAULT = false;
     public static final boolean TOUCHSCREEN_FLASHLIGHT_DEFAULT = false;
 
     // Notification slider
-    public static final String KEYCODE_SLIDER_TOP = "/sys/devices/tri_state_key.82/keyCode_top";
-    public static final String KEYCODE_SLIDER_MIDDLE = "/sys/devices/tri_state_key.82/keyCode_middle";
-    public static final String KEYCODE_SLIDER_BOTTOM = "/sys/devices/tri_state_key.82/keyCode_bottom";
+    public static final String KEYCODE_SLIDER_TOP = "/sys/devices/soc.0/tri_state_key.82/keyCode_top";
+    public static final String KEYCODE_SLIDER_MIDDLE = "/sys/devices/soc.0/tri_state_key.82/keyCode_middle";
+    public static final String KEYCODE_SLIDER_BOTTOM = "/sys/devices/soc.0/tri_state_key.82/keyCode_bottom";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sNodePreferenceMap = new HashMap<String, String>();
@@ -57,10 +57,12 @@ public class Constants {
     static {
         sNodePreferenceMap.put(KEY_SWAP_KEY, KEY_SWAP_NODE);
         sNodePreferenceMap.put(TOUCHSCREEN_CAMERA_GESTURE_KEY, TOUCHSCREEN_CAMERA_NODE);
+        sNodePreferenceMap.put(TOUCHSCREEN_MUSIC_GESTURE_KEY, TOUCHSCREEN_MUSIC_NODE);
         sNodePreferenceMap.put(TOUCHSCREEN_FLASHLIGHT_GESTURE_KEY, TOUCHSCREEN_FLASHLIGHT_NODE);
 
         sNodeDefaultMap.put(KEY_SWAP_KEY, KEY_SWAP_DEFAULT);
         sNodeDefaultMap.put(TOUCHSCREEN_CAMERA_GESTURE_KEY, TOUCHSCREEN_CAMERA_DEFAULT);
+        sNodeDefaultMap.put(TOUCHSCREEN_MUSIC_GESTURE_KEY, TOUCHSCREEN_MUSIC_DEFAULT);
         sNodeDefaultMap.put(TOUCHSCREEN_FLASHLIGHT_GESTURE_KEY, TOUCHSCREEN_FLASHLIGHT_DEFAULT);
     }
 
