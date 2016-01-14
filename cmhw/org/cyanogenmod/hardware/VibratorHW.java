@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (C) 2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,39 +16,39 @@
 
 package org.cyanogenmod.hardware;
 
+import org.cyanogenmod.hardware.util.FileUtils;
 import java.io.File;
 
-import org.cyanogenmod.hardware.util.FileUtils;
-
 public class VibratorHW {
-
-    private static String AMP_PATH = "/sys/devices/virtual/timed_output/vibrator/vmax_mv";
+    private static String LEVEL_PATH = "/sys/class/timed_output/vibrator/vtg_level";
+    private static String MAX_PATH = "/sys/class/timed_output/vibrator/vtg_max";
+    private static String MIN_PATH = "/sys/class/timed_output/vibrator/vtg_min";
 
     public static boolean isSupported() {
-        return new File(AMP_PATH).exists();
+        return new File(LEVEL_PATH).exists();
     }
 
     public static int getMaxIntensity()  {
-        return 3596;
+        return Integer.parseInt(FileUtils.readOneLine(MAX_PATH));
     }
 
     public static int getMinIntensity()  {
-        return 116;
+        return Integer.parseInt(FileUtils.readOneLine(MIN_PATH));
     }
 
     public static int getWarningThreshold()  {
-        return 3248;
+        return -1;
     }
 
     public static int getCurIntensity()  {
-        return Integer.parseInt(FileUtils.readOneLine(AMP_PATH));
+        return Integer.parseInt(FileUtils.readOneLine(LEVEL_PATH));
     }
 
     public static int getDefaultIntensity()  {
-        return 3000;
+        return getMaxIntensity();
     }
 
     public static boolean setIntensity(int intensity)  {
-        return FileUtils.writeLine(AMP_PATH, String.valueOf(intensity));
+        return FileUtils.writeLine(LEVEL_PATH, String.valueOf(intensity));
     }
 }
