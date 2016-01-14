@@ -44,9 +44,9 @@ public class Constants {
     public static final boolean TOUCHSCREEN_FLASHLIGHT_DEFAULT = false;
 
     // Notification slider
-    public static final String KEYCODE_SLIDER_TOP = "/sys/devices/tri_state_key.86/keyCode_top";
-    public static final String KEYCODE_SLIDER_MIDDLE = "/sys/devices/tri_state_key.86/keyCode_middle";
-    public static final String KEYCODE_SLIDER_BOTTOM = "/sys/devices/tri_state_key.86/keyCode_bottom";
+    public static final String KEYCODE_SLIDER_TOP = "/sys/devices/tri_state_key.82/keyCode_top";
+    public static final String KEYCODE_SLIDER_MIDDLE = "/sys/devices/tri_state_key.82/keyCode_middle";
+    public static final String KEYCODE_SLIDER_BOTTOM = "/sys/devices/tri_state_key.82/keyCode_bottom";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sNodePreferenceMap = new HashMap<String, String>();
