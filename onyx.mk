@@ -19,9 +19,18 @@ PRODUCT_COPY_FILES += \
      $(call find-copy-subdir-files,*,${LOCAL_PATH}/prebuilt/system,system)
 	 
 # Ramdisk
-PRODUCT_COPY_FILES += \
-     $(call find-copy-subdir-files,*,${LOCAL_PATH}/ramdisk,root)
-	 
+PRODUCT_PACKAGES += \
+    fstab.onyx \
+    init.onyx.rc \
+    init.onyx.power.rc \
+    init.onyx.usb.rc \
+    init.recovery.onyx.rc \
+    ueventd.onyx.rc
+
+PRODUCT_PACKAGES += \
+    init.onyx.bt.sh \
+    init.onyx.ril.sh
+
 # Prebuilt DT
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/dt.img:dt.img
