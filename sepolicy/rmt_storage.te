@@ -1,2 +1,7 @@
 # Our rmt storage bridges the ssd partition too
 allow rmt_storage ssd_device:blk_file rw_file_perms;
+allow rmt_storage block_device:dir search;
+allow rmt_storage self:process execmem;
+# dontaudit rmt_storage kmem_device:chr_file rw_file_perms;
+# dontaudit rmt_storage self:capability sys_rawio;
+# dontaudit rmt_storage self:capability dac_override;

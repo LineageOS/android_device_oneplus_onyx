@@ -174,6 +174,29 @@ TARGET_NO_RPC := true
 BOARD_SEPOLICY_DIRS += \
     $(PLATFORM_PATH)/sepolicy
 
+BOARD_SEPOLICY_UNION += \
+    bootanim.te \
+    device.te \
+    file.te \
+    file_contexts \
+    genfs_contexts \
+    healthd.te \
+    mediaserver.te \
+    property.te \
+    property_contexts \
+    radio.te \
+    rmt_storage.te \
+    servicemanager.te \
+    shell.te \
+    system_app.te \
+    system_server.te \
+    tee.te \
+    thermal-engine.te \
+    ueventd.te \
+    vold.te \
+    wcnss_service.te \
+    zygote.te
+
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_HAS_QCOM_WLAN_SDK          := true
