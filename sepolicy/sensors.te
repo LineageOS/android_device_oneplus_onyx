@@ -1,2 +1,2 @@
-allow sensors persist_file:file getattr;
+allow sensors persist_file:file rw_file_perms;
 
