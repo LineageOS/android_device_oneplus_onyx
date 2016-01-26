@@ -1,0 +1,2 @@
+allow tee vfat:dir search;
+
