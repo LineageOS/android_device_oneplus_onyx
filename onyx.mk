@@ -52,6 +52,10 @@ PRODUCT_PACKAGES += \
     init.recovery.qcom.rc \
     ueventd.qcom.rc
 
+# Camera compatibility layer
+PRODUCT_PACKAGES += \
+    libopx_cam
+
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService \

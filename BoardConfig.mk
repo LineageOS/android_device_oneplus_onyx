@@ -163,7 +163,7 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_RIL_VARIANT := caf
 
 #Preload Libs
-TARGET_LDPRELOAD := libNimsWrap.so
+TARGET_LDPRELOAD := libNimsWrap.so:libopx_cam.so
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
