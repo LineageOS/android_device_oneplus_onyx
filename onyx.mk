@@ -25,10 +25,6 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-108
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/keylayout/synaptics-rmi.kl:system/usr/keylayout/synaptics-rmi.kl
 
-# Kernel
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/dt.img:dt.img
-
 # Config scripts
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh
@@ -126,6 +122,10 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-2048-hwui
 # Display
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# dtbTool
+PRODUCT_PACKAGES += \
+    dtbToolONYX
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
