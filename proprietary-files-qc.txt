@@ -48,7 +48,7 @@ etc/firmware/leia_pfp_470.fw
 etc/firmware/leia_pm4_470.fw
 
 # GPS
-priv-app/com.qualcomm.location/com.qualcomm.location.apk
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk
 bin/loc_launcher
 bin/location-mq
 bin/lowi-server
@@ -119,7 +119,7 @@ vendor/lib/liblisten.so
 vendor/lib/liblistensoundmodel.so
 
 # Media
-vendor/lib/libHevcSwDecoder.so
+-vendor/lib/libHevcSwDecoder.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmmosal.so
 vendor/lib/libmmparser.so
@@ -143,7 +143,7 @@ vendor/lib/libqti-perfd-client.so
 # Postprocessing
 bin/mm-pp-daemon
 vendor/lib/libdisp-aba.so
-vendor/lib/libmm-abl.so
+-vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
@@ -166,12 +166,9 @@ vendor/lib/libqmiservices.so
 vendor/lib/libsmemlog.so
 vendor/lib/libsystem_health_mon.so
 
-# QuickBoot
-# -app/QuickBoot/QuickBoot.apk
-
 # Radio
-priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-app/shutdownlistener/shutdownlistener.apk
+-priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+-app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/qmuxd
 bin/radish
@@ -209,9 +206,9 @@ vendor/lib/libthermalioctl.so
 
 # Time services
 bin/time_daemon
-vendor/lib/libtime_genoff.so
-vendor/lib/libTimeService.so
-app/TimeService/TimeService.apk
+-vendor/lib/libtime_genoff.so
+-vendor/lib/libTimeService.so
+-app/TimeService/TimeService.apk
 
 # Venus (media) firmware
 etc/firmware/venus.b01
@@ -228,49 +225,3 @@ etc/firmware/tp/15055/15055_Limit_Tpk.img
 
 # WiFi
 lib/libwpa_client.so
-# lib/libwcnss_qmi.so
-
-# USF
-# etc/usf_post_boot.sh
-# etc/usf_settings.sh
-# etc/usf/sw_calib/cfg_dragon/usf_sw_calib_dragon.cfg
-# etc/usf/sw_calib/cfg_dragon/usf_sw_calib_tester_dragon.cfg
-# etc/usf/sw_calib/cfg_liquid/usf_sw_calib_tester_liquid.cfg
-# etc/usf/sw_calib/cfg_liquid/usf_sw_calib_liquid.cfg
-# etc/usf/sw_calib/cfg_fluid/usf_sw_calib_tester_fluid.cfg
-# etc/usf/sw_calib/cfg_fluid/usf_sw_calib_fluid.cfg
-# etc/usf/form_factor_liquid.cfg
-# etc/usf/pairing/cfg_liquid/usf_pairing_liquid.cfg
-# etc/usf/pairing/cfg_fluid/usf_pairing_fluid.cfg
-# etc/usf/version.txt
-# etc/usf/sync_gesture/cfg_liquid/usf_sync_gesture_liquid.cfg
-# etc/usf/sync_gesture/cfg_liquid/usf_sync_gesture_liquid_tx_transparent_data.bin
-# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_fluid_tx_transparent_data.bin
-# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_apps_fluid.cfg
-# etc/usf/sync_gesture/cfg_fluid/usf_sync_gesture_fluid.cfg
-# etc/usf/tester/cfg_liquid/usf_tester_epos_liquid.cfg
-# etc/usf/tester/cfg_fluid/usf_tester_epos_fluid.cfg
-# etc/usf/tester/cfg_fluid/usf_tester_echo_fluid.cfg
-# etc/usf/epos/cfg_dragon/service_settings_dragon.xml
-# etc/usf/epos/cfg_liquid/ps_tuning1_idle_liquid.bin
-# etc/usf/epos/cfg_liquid/service_settings_liquid_folio.xml
-# etc/usf/epos/cfg_liquid/ps_tuning1_standby_liquid.bin
-# etc/usf/epos/cfg_liquid/service_settings_liquid.xml
-# etc/usf/epos/cfg_liquid/usf_epos_liquid.cfg
-# etc/usf/epos/cfg_liquid/usf_epos_liquid_ps_disabled.cfg
-# etc/usf/epos/cfg_liquid/service_settings_liquid_1_to_1.xml
-# etc/usf/epos/ASDConf.sdc
-# etc/usf/epos/cfg_fluid/usf_epos_fluid.cfg
-# etc/usf/epos/cfg_fluid/service_settings_fluid.xml
-# etc/usf/epos/cfg_fluid/ps_tuning1_fluid.bin
-# etc/usf/readme.txt
-# etc/usf/form_factor_fluid.cfg
-# bin/usf_epos
-# bin/usf_tester
-# bin/usf_pairing
-# bin/usf_sw_calib
-# bin/usf_sync_gesture
-# vendor/lib/libual.so
-# vendor/lib/libualutil.so
-# vendor/lib/libdpencalib.so
-# vendor/lib/libqcsyncgesture.so
