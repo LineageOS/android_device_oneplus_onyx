@@ -1,4 +1,4 @@
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,3 +27,10 @@ PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_MODEL := ONE
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
+
+## Use the latest approved GMS identifiers unless running a signed build
+ifneq ($(SIGN_BUILD),true)
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT=oneplus/onyx/E1003:5.1.1/LMY47V/1441677661:user/release-keys \
+    PRIVATE_BUILD_DESC="onyx-user 5.1.1 LMY47V 1441677661 release-keys"
+endif
