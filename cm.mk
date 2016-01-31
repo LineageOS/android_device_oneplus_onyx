@@ -30,3 +30,10 @@ PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_MODEL := OnePlus X
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
+
+## Use the latest approved GMS identifiers unless running a signed build
+ifneq ($(SIGN_BUILD),true)
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BUILD_FINGERPRINT=oneplus/onyx/E1003:5.1.1/LMY47V/1441677661:user/release-keys \
+    PRIVATE_BUILD_DESC="onyx-user 5.1.1 LMY47V 1441677661 release-keys"
+endif
