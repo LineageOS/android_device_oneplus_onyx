@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1fcbff3d_b217f6a3",
+        "filename": "proprietary-files-qc.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 11336
+      },
+      "writtenOn": "2016-02-03T01:00:30Z",
+      "side": 1,
+      "message": "We dont have it in vendor ATM",
+      "revId": "cc3940377da75d1941bdaf4dee0c3bff9356d41d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
