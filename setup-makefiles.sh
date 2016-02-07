@@ -99,8 +99,6 @@ DEVICE_PACKAGE_OVERLAYS += vendor/$VENDOR/$DEVICE/overlay
 
 PRODUCT_PACKAGES += \\
     com.qualcomm.location \\
-    PPPreference \\
-    QuickBoot \\
     qcrilmsgtunnel \\
     shutdownlistener
 
@@ -161,9 +159,7 @@ EOF
 
 LOCAL_PATH := \$(call my-dir)
 
-ifneq (\$(filter bacon,\$(TARGET_DEVICE)),)
-
-ifeq (\$(QCPATH),)
+ifneq (\$(filter onyx,\$(TARGET_DEVICE)),)
 
 include \$(CLEAR_VARS)
 LOCAL_MODULE := com.qualcomm.location
@@ -179,27 +175,7 @@ include \$(BUILD_PREBUILT)
 include \$(CLEAR_VARS)
 LOCAL_MODULE := qcrilmsgtunnel
 LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_MODULE_CLASS := APPS
-LOCAL_CERTIFICATE := platform
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := PPPreference
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/app/PPPreference/PPPreference.apk
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_MODULE_CLASS := APPS
-LOCAL_CERTIFICATE := platform
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := QuickBoot
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_SRC_FILES := proprietary/app/QuickBoot/QuickBoot.apk
+LOCAL_SRC_FILES := proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_CLASS := APPS
@@ -369,8 +345,6 @@ LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH := \$(TARGET_OUT_SHARED_LIBRARIES)
 LOCAL_PROPRIETARY_MODULE := true
 include \$(BUILD_PREBUILT)
-
-endif
 
 endif
 
