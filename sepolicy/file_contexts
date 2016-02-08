@@ -21,3 +21,6 @@
 
 # Backlight
 /sys/class/leds/lcd-backlight/brightness                u:object_r:proc_touchpanel:s0
+
+# Thermal-engine
+/system/bin/thermal-engine                              u:object_r:thermal-engine_exec:s0
