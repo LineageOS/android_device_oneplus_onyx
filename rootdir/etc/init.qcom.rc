@@ -240,7 +240,10 @@ on post-fs
     chown system camera /sys/class/leds/torch-light/brightness
     chmod 0660 /sys/class/leds/torch-light/brightness
 
-    # Tri-state keys
+    # Buttons
+    chown root system /proc/s1302/key_rep
+    chmod 0660 /proc/s1302/key_rep
+
     chown root system /proc/tri-state-key/keyCode_top
     chown root system /proc/tri-state-key/keyCode_middle
     chown root system /proc/tri-state-key/keyCode_bottom
