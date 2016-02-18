@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 The AOSParadox Project
+ * Copyright (C) 2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,7 @@
  */
 
 #define CAMERA_PARAMETERS_EXTRA_C \
-const char CameraParameters::WHITE_BALANCE_MANUAL_CCT[] = "manual-cct"; \
-const char CameraParameters::FOCUS_MODE_MANUAL_POSITION[] = "manual"; \
 const char CameraParameters::KEY_APP_MASK[] = "app-mask";
 
-
 #define CAMERA_PARAMETERS_EXTRA_H \
-    static const char WHITE_BALANCE_MANUAL_CCT[]; \
-    static const char FOCUS_MODE_MANUAL_POSITION[]; \
     static const char KEY_APP_MASK[];
-
-
