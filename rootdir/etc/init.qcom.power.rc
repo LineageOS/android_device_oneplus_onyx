@@ -1,7 +1,3 @@
-on early-init
-    write /sys/block/mmcblk0/queue/scheduler "noop"
-    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
-
 on enable-low-power
     write /sys/module/lpm_levels/enable_low_power/l2 4
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
@@ -106,3 +102,4 @@ on property:recovery.perf.mode=0
 
 on property:dev.bootcomplete=1
     setprop sys.io.scheduler "bfq"
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
