@@ -158,6 +158,7 @@ TARGET_RECOVERY_FSTAB := $(PLATFORM_PATH)/rootdir/etc/fstab.qcom
 
 # RIL
 BOARD_PROVIDES_LIBRIL := true
+BOARD_RIL_CLASS += ../../../device/oneplus/onyx/ril
 
 # RPC
 TARGET_NO_RPC := true
