@@ -43,7 +43,7 @@ void init_msm_properties(unsigned long msm_id,unsigned long msm_ver, char *board
     UNUSED(msm_ver);
     UNUSED(board_type);
 
-    rc = property_get("ro.cm.device", device);
+    rc = property_get("ro.product.device", device);
     if (!rc || !ISMATCH(device, "onyx"))
         return;
 
