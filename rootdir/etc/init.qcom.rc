@@ -563,6 +563,12 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
+service bdAddrLoader /system/bin/bdAddrLoader -f /data/oemnvitems/4678 -h -x
+    class main
+    user bluetooth
+    group system bluetooth
+    oneshot
+
 service adsprpcd /system/bin/adsprpcd
    class main
    user media

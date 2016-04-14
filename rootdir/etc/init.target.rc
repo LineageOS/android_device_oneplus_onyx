@@ -1,0 +1,174 @@
+# Copyright (c) 2011-2014, The Linux Foundation. All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are
+# met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above
+#       copyright notice, this list of conditions and the following
+#       disclaimer in the documentation and/or other materials provided
+#       with the distribution.
+#     * Neither the name of The Linux Foundation nor the names of its
+#       contributors may be used to endorse or promote products derived
+#       from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT
+# ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS
+# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+# BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+# IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#
+#
+on early-init
+    mkdir /firmware 0771 system system
+    mkdir /cache 0771 system system
+    symlink /data/tombstones /tombstones
+
+on init
+    # Set the property to indicate type of virtual display to 0
+    # 0 indicates that virtual display is not a Wifi display and that the
+    # session is not exercised through RemoteDisplay in the android framework
+    setprop persist.sys.wfd.virtual 0
+
+    # USB OTG support
+    chmod 0701 /mnt/media_rw
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0700 root root
+
+    export LD_PRELOAD /system/lib/libop_ril.so
+
+on fs
+    mount_all fstab.qcom
+
+    restorecon_recursive   /persist
+    mkdir /persist/data 0700 system system
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+
+    chmod 0660 /dev/ramdump_pronto
+    chown system system /dev/ramdump_pronto
+
+    #cpufreq selinux
+    restorecon_recursive /sys/devices/system/cpu/cpufreq
+
+on post-fs-data
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/vtg_max
+    chown system system /sys/class/timed_output/vibrator/vtg_min
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_level
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_max
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_min
+
+    # Reverse Keys
+    write /proc/s1302/key_rep 1
+
+    # Tri-state keys
+    chown system system /sys/devices/tri_state_key.86/keyCode_top
+    chown system system /sys/devices/tri_state_key.86/keyCode_middle
+    chown system system /sys/devices/tri_state_key.86/keyCode_bottom
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_top
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_middle
+    chmod 0644 /sys/devices/tri_state_key.86/keyCode_bottom
+
+    chown system radio /proc/touchpanel/gesture_enable
+    chmod 0660 /proc/touchpanel/gesture_enable
+
+on boot
+    #Create OPPO NV item directory
+    mkdir /data/opponvitems 0771 radio radio
+
+    # For WiFi
+    chown wifi wifi /dev/rfkill
+    chmod 0600 /dev/rfkill
+
+# Allow usb charging to be disabled persistently
+on property:persist.usb.chgdisabled=1
+    write /sys/class/power_supply/battery/charging_enabled 0
+
+on property:persist.usb.chgdisabled=0
+    write /sys/class/power_supply/battery/charging_enabled 1
+
+service bdAddrLoader /system/bin/bdAddrLoader -f /data/oemnvitems/447 -h -x
+    class main
+    user bluetooth
+    group system bluetooth
+    oneshot
+
+# bt_hsic_control
+service bt_hsic_control /system/bin/sh /system/etc/hsic.control.bt.sh
+    user root
+    disabled
+
+on property:bluetooth.hsic_ctrl=load_wlan
+    start bt_hsic_control
+
+on property:bluetooth.hsic_ctrl=unbind_hsic
+    start bt_hsic_control
+
+#start camera server as daemon
+service qcamerasvr /system/bin/mm-qcamera-daemon
+    class late_start
+    user camera
+    group camera system inet input graphics
+
+service qseecomd /system/bin/qseecomd
+   class core
+   user root
+   group root
+
+service mpdecision /system/bin/mpdecision --avg_comp
+   class main
+   user root
+   group system
+   disabled
+
+service time_daemon /system/bin/time_daemon
+   class late_start
+   user root
+   group root
+
+service adsprpcd /system/bin/adsprpcd
+   class main
+   user media
+   group media
+
+service wcnss-service /system/bin/wcnss_service
+    class main
+    user root
+    group system wifi qcom_diag radio
+    oneshot
+
+service ril-daemon /system/bin/rild
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    socket cutback stream 660 media radio
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+
+service ril-daemon1 /system/bin/rild -c 2
+    class main
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc qcom_diag log net_raw diag
+    disabled
+
+service ril-init-script /system/bin/sh /init.qcom.ril.sh
+    class late_start
+    user root
+    group root
+    oneshot
