@@ -10,3 +10,8 @@ allow mediaserver sensorservice_service:service_manager find;
 allow mediaserver system_server:unix_stream_socket { read write };
 
 binder_call(mediaserver, audiod)
+
+# Hacks for integration of Camera Server into mediaserver
+allow mediaserver audio_device:chr_file { read write };
+allow mediaserver cameraproxy_service:service_manager find;
+allow mediaserver cameraserver_service:service_manager add;
