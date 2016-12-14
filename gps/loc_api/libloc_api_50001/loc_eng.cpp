@@ -492,15 +492,15 @@ struct LocEngSuplVer : public LocMsg {
 };
 
 struct LocEngSuplMode : public LocMsg {
-    UlpProxyBase* mUlp;
+    LocEngAdapter* mAdapter;
 
-    inline LocEngSuplMode(UlpProxyBase* ulp) :
-        LocMsg(), mUlp(ulp)
+    inline LocEngSuplMode(LocEngAdapter* adapter) :
+        LocMsg(), mAdapter(adapter)
     {
         locallog();
     }
     inline virtual void proc() const {
-        mUlp->setCapabilities(getCarrierCapabilities());
+        mAdapter->getUlpProxy()->setCapabilities(ContextBase::getCarrierCapabilities());
     }
     inline  void locallog() const {
     }
@@ -2729,7 +2729,7 @@ void loc_eng_configuration_update (loc_eng_data_s_type &loc_eng_data,
                                                             gps_conf.A_GLONASS_POS_PROTOCOL_SELECT));
             }
             if (gps_conf_tmp.SUPL_MODE != gps_conf.SUPL_MODE) {
-                adapter->sendMsg(new LocEngSuplMode(adapter->getUlpProxy()));
+                adapter->sendMsg(new LocEngSuplMode(adapter));
             }
         }
 
