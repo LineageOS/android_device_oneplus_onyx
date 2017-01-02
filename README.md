@@ -14,4 +14,4 @@ Battery | 2525 mAh
 Dimensions | 5.51 x 2.72 x 0.27 in
 Camera  | 13 MP, f/2.2, phase detection autofocus, LED flash
 
-Copyright 2016, The CyanogenMod Project
+Copyright 2016, The LineageOS Project
