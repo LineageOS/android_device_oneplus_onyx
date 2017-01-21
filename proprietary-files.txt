@@ -126,7 +126,6 @@ etc/permissions/dpmapi.xml
 -framework/com.quicinc.cne.jar
 -framework/ConnectivityExt.jar
 -framework/dpmapi.jar
--priv-app/CNEService/CNEService.apk
 vendor/lib/libcne.so
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneconn.so
