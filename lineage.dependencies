@@ -4,6 +4,10 @@
     "target_path": "device/oppo/common"
   },
   {
+    "repository": "android_device_qcom_common",
+    "target_path": "device/qcom/common"
+  },
+  {
     "repository":  "android_kernel_oneplus_onyx",
     "target_path": "kernel/oneplus/onyx"
   }
