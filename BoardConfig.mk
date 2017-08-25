@@ -47,6 +47,7 @@ TARGET_USES_64_BIT_BINDER := true
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=23 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
@@ -179,8 +180,8 @@ TARGET_NO_RPC := true
 include device/qcom/sepolicy/sepolicy.mk
 include device/qcom/sepolicy/legacy-sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
-    $(PLATFORM_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+#    $(PLATFORM_PATH)/sepolicy
 
 # SnapDragon LLVM Compiler
 TARGET_USE_SDCLANG := true
