@@ -23,5 +23,6 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils
 
 LOCAL_MODULE := lights.msm8974
 LOCAL_MODULE_TAGS := optional
+LOCAL_PROPRIETARY_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)

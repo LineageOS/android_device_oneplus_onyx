@@ -16,8 +16,8 @@ libgps_utils_so_la_h_sources = log_util.h \
             ../platform_lib_abstractions/platform_lib_time.h \
             ../platform_lib_abstractions/platform_lib_macros.h
 
-libgps_utils_so_la_c_sources = linked_list.c \
-            msg_q.c \
+libgps_utils_so_la_c_sources = linked_list.cpp \
+            msg_q.cpp \
             loc_cfg.cpp \
             loc_log.cpp \
             ../platform_lib_abstractions/elapsed_millis_since_boot.cpp
@@ -40,5 +40,6 @@ endif
 
 libgps_utils_so_la_LIBADD = -lstdc++ -lcutils
 
-#Create and Install libraries
+# Create and Install libraries
 lib_LTLIBRARIES = libgps_utils_so.la
+
