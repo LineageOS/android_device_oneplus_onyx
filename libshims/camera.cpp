@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-#ifndef _BDROID_BUILDCFG_H
-#define _BDROID_BUILDCFG_H
+#include <string>
 
-#define BLUETOOTH_QTI_SW TRUE
+extern "C" void _ZN7android13GraphicBufferC1EjjijNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE(
+    uint32_t inWidth, uint32_t inHeight, int inFormat, uint32_t inUsage,
+    std::string requestorName);
 
-#define BTM_DEF_LOCAL_NAME   "OnePlus X"
+extern "C" void _ZN7android13GraphicBufferC1Ejjij(
+    uint32_t inWidth, uint32_t inHeight, int inFormat, uint32_t inUsage) {
+  std::string requestorName = "<Unknown>";
+  _ZN7android13GraphicBufferC1EjjijNSt3__112basic_stringIcNS1_11char_traitsIcEENS1_9allocatorIcEEEE(
+      inWidth, inHeight, inFormat, inUsage, requestorName);
+}
 
-// Disables read remote device feature
-#define BTA_SKIP_BLE_READ_REMOTE_FEAT FALSE
-#define MAX_L2CAP_CHANNELS    16
 
-//#define BLE_VND_INCLUDED   TRUE
-
-// Skips conn update at conn completion
-#define BTA_BLE_SKIP_CONN_UPD  FALSE
-#define BLE_PERIPHERAL_ADV_NAME  FALSE
-#define BT_CLEAN_TURN_ON_DISABLED 1
-
-/* Defined if the kernel does not have support for CLOCK_BOOTTIME_ALARM */
-#define KERNEL_MISSING_CLOCK_BOOTTIME_ALARM TRUE
-#endif
