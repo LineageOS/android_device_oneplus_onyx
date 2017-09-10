@@ -28,8 +28,9 @@ TARGET_SCREEN_WIDTH := 1080
 # Display
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_PROPERTY_OVERRIDES += debug.hwui.use_buffer_age=false
 
-# Ramdisk
+# Init
 PRODUCT_PACKAGES += \
     fstab.qcom \
     init.qcom.power.rc \
@@ -101,16 +102,16 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     camera.msm8974 \
-    Snap
+    camera.device@1.0-impl \
+    android.hardware.camera.provider@2.4-impl \
+    libshims_camera \
+    libshims_parameters \
+    libshims_atomic
 
 # Data
 PRODUCT_PACKAGES += \
     librmnetctl \
     rmnetcli
-
-# Doze
-PRODUCT_PACKAGES += \
-    OneplusDoze
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -119,11 +120,17 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
     liboverlay \
-    libtinyxml
+    libtinyxml \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.memtrack@1.0-impl
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8974
+    gps.msm8974 \
+    libgps.utils
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
@@ -148,7 +155,8 @@ PRODUCT_COPY_FILES += \
 
 # Keystore
 PRODUCT_PACKAGES += \
-    keystore.msm8974
+    keystore.msm8974 \
+    android.hardware.keymaster@3.0-impl
 
 # FM
 PRODUCT_PACKAGES += \
@@ -157,7 +165,26 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8974
+    lights.msm8974 \
+    android.hardware.light@2.0-impl
+
+# new gatekeeper HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl
+
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    libbt-vendor
+
+# WiFi HAL
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service
+
+# GNSS HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl \
+    libshims_gpn
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -183,34 +210,59 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefrighthw
 
-# Power
+# Powe
 PRODUCT_PACKAGES += \
-    power.msm8974
+    power.msm8974 \
+    android.hardware.power@1.0-impl 
 
 # RIL
 PRODUCT_PACKAGES += \
     libcnefeatureconfig \
-    libxml2
+    libxml2 \
+    rild_socket \
+    android.hardware.radio@1.0-impl
 
 # Sensors
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:system/etc/sensors/sensor_def_qcomdev.conf
 
 PRODUCT_PACKAGES += \
-    libshims_sensors
+    libshims_sensors \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.contexthub@1.0-impl
 
 # Thermal config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
+
+# RenderScript
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
+
 # USB
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
+    com.android.future.usb.accessory \
+    android.hardware.usb@1.0-service
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/hidl/manifest.xml:system/vendor/manifest.xml
+
+# Default OMX service to non-Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
 
 # WiFi
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/vendor/etc/wifi/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
 PRODUCT_PACKAGES += \
@@ -220,13 +272,12 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf \
     wpa_supplicant_overlay.conf \
-    p2p_supplicant_overlay.conf \
-    hostapd_default.conf \
-    hostapd.accept \
-    hostapd.deny
+    p2p_supplicant_overlay.conf
 
 PRODUCT_PACKAGES += \
-    wcnss_service
+    wcnss_service \
+    wificond \
+    wifilogd
 
 # Inherit from oppo-common
 $(call inherit-product, device/oppo/common/common.mk)

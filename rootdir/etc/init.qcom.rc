@@ -17,11 +17,9 @@
 import init.qcom.usb.rc
 import init.qcom.power.rc
 
-on early-init
-    chown system system /sys/kernel/debug/kgsl/proc
-
 on init
-    export LD_SHIM_LIBS "/system/lib/libgui.so|libshims_sensors.so"
+    export LD_SHIM_LIBS "/system/lib/libgui.so|libshims_sensors.so:/system/vendor/lib/libmmcamera2_stats_algorithm.so|libshims_atomic.so:/system/vendor/lib/libril-qc-qmi-1.so|rild_socket.so:/system/vendor/lib/libizat_core.so|libshims_gpn.so:/system/lib/hw/camera.vendor.msm8974.so|libshims_parameters.so:/system/lib/hw/camera.vendor.msm8974.so|libshims_camera.so"
+    export LD_DEBUG=1
 
     # Set permissions for persist partition
     mkdir /persist 0771 system system
@@ -72,6 +70,8 @@ on boot
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
 
+    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+
     # Charger
     chown root system /sys/module/qpnp_charger/parameters/charger_monitor
     chown root system /sys/class/power_supply/battery/input_current_max
@@ -94,21 +94,7 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_delack_seg
     chown system system /sys/kernel/ipv4/tcp_use_userconfig
 
-#   Define TCP buffer sizes for various networks
-#   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
-    setprop net.tcp.buffersize.default 4096,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.lte     524288,1048576,2097152,262144,524288,1048576
-    setprop net.tcp.buffersize.umts    4094,87380,110208,4096,16384,110208
-    setprop net.tcp.buffersize.hspa    4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsupa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hsdpa   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.hspap   4094,87380,1220608,4096,16384,1220608
-    setprop net.tcp.buffersize.edge    4093,26280,35040,4096,16384,35040
-    setprop net.tcp.buffersize.gprs    4092,8760,11680,4096,8760,11680
-    setprop net.tcp.buffersize.evdo    4094,87380,262144,4096,16384,262144
-    setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
-
-#   Define TCP delayed ack settings for WiFi & LTE
+    # Define TCP delayed ack settings for WiFi & LTE
     setprop net.tcp.delack.default     1
     setprop net.tcp.delack.wifi        20
     setprop net.tcp.delack.lte         8
@@ -116,8 +102,8 @@ on boot
     setprop net.tcp.usercfg.wifi       1
     setprop net.tcp.usercfg.lte        1
 
-#   Assign TCP buffer thresholds to be ceiling value of technology maximums
-#   Increased technology maximums should be reflected here.
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  8388608
     write /proc/sys/net/core/wmem_max  8388608
 
@@ -130,18 +116,7 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio7/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -171,17 +146,25 @@ on boot
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
     # modem
     write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
-    # venus
+    # wcnss
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
-
-    # Adaptive LMK
-    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
-    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+    # venus
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
     # Mark the copy complete flag to not completed
     write /data/misc/radio/copy_complete 0
     chown radio radio /data/misc/radio/copy_complete
     chmod 0660 /data/misc/radio/copy_complete
+
+    # Adaptive LMK
+    write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
+    write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 53059
+
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
+    # Mark wifi driver as unloaded - "ok" indicates loaded
+    setprop wlan.driver.status not_ok
 
 on post-fs
     # Reverse Keys
@@ -290,8 +273,7 @@ on post-fs
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
 on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-
+    rm /data/logcat.log
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
 
@@ -308,9 +290,6 @@ on post-fs-data
     chown system root /persist/sensors/sensors_settings
     mkdir /data/misc/sensors 0775 system system
     restorecon_recursive /data/misc/sensors
-
-    # Create directory used by USF
-    mkdir /data/usf 0700 system system
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -378,10 +357,6 @@ on fs
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
 
-    mkdir /dev/usb-ffs 0770 shell shell
-    mkdir /dev/usb-ffs/adb 0770 shell shell
-    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
-    write /sys/class/android_usb/android0/f_ffs/aliases adb
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
@@ -390,6 +365,11 @@ on property:hw.fm.init=1
 
 on property:hw.fm.init=0
     write /sys/module/radio_iris_transport/parameters/fmsmd_set 0
+
+service logcat_debug /system/bin/logcat -b -all -f /data/logcat.log -v threadtime
+    class main
+    user root
+    group system
 
 service rmt_storage /system/bin/rmt_storage
     class core
@@ -405,12 +385,12 @@ service rfs_access /system/bin/rfs_access
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps diag
 
 service netmgrd /system/bin/netmgrd
     class main
     user root
-    group radio
+    group radio system
 
 # QCOM sensor
 service sensors /system/bin/sensors.qcom
@@ -423,19 +403,12 @@ service sensors /system/bin/sensors.qcom
 on property:ro.data.large_tcp_window_size=true
     write /proc/sys/net/ipv4/tcp_adv_win_scale  2
 
-on property:persist.env.fastdorm.enabled=true
-    setprop persist.radio.data_no_toggle 1
-
-on property:sys.boot_completed=1
-    # Temp hack to fix torch not being registered on boot
-    restart media
-
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
 
-service p2p_supplicant /system/bin/wpa_supplicant \
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf -N \
     -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
@@ -451,44 +424,21 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant \
-    -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
-    -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    #   we will start as root and wpa_supplicant will switch to user wifi
-    #   after setting up the capabilities required for WEXT
-    #   user wifi
-    #   group wifi inet keystore
-    class main
-    socket wpa_wlan0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps qcom_oncrpc inet net_raw diag qcom_diag net_admin wifi
+    group gps qcom_oncrpc inet net_raw diag net_admin wifi
 
 service qseecomd /system/bin/qseecomd
     class core
     user root
     group root
 
-service charger /sbin/healthd -c
+service charger /charger
     class charger
     critical
-    seclabel u:r:healthd:s0
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-    seclabel u:r:healthd:s0
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
+    group system graphics
+    seclabel u:r:charger:s0
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -501,32 +451,24 @@ service mpdecision /system/bin/mpdecision --avg_comp
    group system
    disabled
 
-service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-
 service time_daemon /system/bin/time_daemon
     class late_start
     user root
     group root
 
 on property:vold.decrypt=trigger_restart_framework
-    start config_bdaddr
+    start config_bt_addr
     start wcnss-service
 
-service config_bdaddr /system/bin/btnvtool -O
-    class late_start
+service config_bt_addr /system/bin/btnvtool -O
+    class core
     user bluetooth
     group bluetooth radio
 
 service hciattach /system/bin/sh /init.qcom.bt.sh
     class late_start
     user root
-    group bluetooth net_bt_admin qcom_diag radio
+    group bluetooth net_bt_admin diag radio
     disabled
     oneshot
 
@@ -547,36 +489,23 @@ service audiod /system/bin/audiod
    group system
 
 service wcnss-service /system/bin/wcnss_service
-    class late_start
+    class main
     user system
-    group system wifi qcom_diag radio
+    group system wifi diag radio
     oneshot
-
-service ppd /system/bin/mm-pp-daemon
-    class late_start
-    disabled
-    user system
-    socket pps stream 0660 system system
-    group system graphics
-
-on property:init.svc.surfaceflinger=stopped
-    stop ppd
-
-on property:init.svc.surfaceflinger=running
-    start ppd
 
 # diag logging
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
 service diag_mdlog_stop /system/bin/diag_mdlog -k
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
@@ -594,15 +523,8 @@ service ssr_diag /system/bin/ssr_diag
     user system
     group system
 
-service pfm /system/bin/pfm
-    class late_start
-    user system
-    group system drmrpc mount
-
-service ril-daemon1 /system/bin/rild -c 2
+service ril-daemon1 /vendor/bin/hw/rild -c 2
     class main
-    socket rild2 stream 660 root radio
-    socket sap_uim_socket2 stream 660 bluetooth bluetooth
-    socket rild-debug2 stream 660 radio system
-    user root
-    group radio cache inet misc audio log readproc wakelock qcom_diag
+    user radio
+    group radio cache inet misc audio log readproc wakelock oem_2901
+    capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
