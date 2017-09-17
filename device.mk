@@ -237,11 +237,8 @@ PRODUCT_COPY_FILES += \
 
 # USB
 PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service.onyx \
     com.android.future.usb.accessory
-
-# USB
-PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service
 
 # Vibrator
 PRODUCT_PACKAGES += \
