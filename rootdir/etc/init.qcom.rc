@@ -513,15 +513,16 @@ service config_bdaddr /system/bin/btnvtool -O
     user bluetooth
     group bluetooth radio
 
-service hciattach /system/bin/sh /init.qcom.bt.sh
+service hciattach /system/bin/hci_qcomm_init -e
     class late_start
-    user root
-    group bluetooth net_bt_admin oem_2950 radio
+    user bluetooth
+    group bluetooth net_bt_admin oem_2950 diag radio
     disabled
     oneshot
 
 on property:bluetooth.hciattach=true
     start hciattach
+    setprop bluetooth.status on
 
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
