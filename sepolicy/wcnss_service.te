@@ -1,2 +1,2 @@
-allow wcnss_service nv_data_file:dir { search };
-allow wcnss_service nv_data_file:file { open read getattr };
+# Allow wcnss_service to setprop wlan.driver.config
+set_prop(wcnss_service, wifi_prop)
