@@ -2,11 +2,6 @@
 # system.prop for OnePlus X
 #
 
-ro.build.product=OnePlus
-ro.product.device=OnePlus
-ro.build.description=OnePlus
-ro.build.fingerprint=OnePlus/OnePlus/OnePlus:5.1.1/LMY47V/1441677661:user/release-keys
-
 # RIL
 DEVICE_PROVISIONED=1
 persist.data.netmgrd.qos.enable=true
